@@ -3,37 +3,28 @@ package com.kickstart;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Solution {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         int tests = Integer.parseInt(bufferedReader.readLine());
-
+        int caseCounter = 1;
         while (tests > 0) {
             String[] firstLineInput = bufferedReader.readLine().split(" ");
-            String[] secondLineInput = bufferedReader.readLine().split(" ");
+            String secondLineInput = bufferedReader.readLine();
             int excercises = Integer.parseInt(firstLineInput[0]);
             int expandExercises = Integer.parseInt(firstLineInput[1]);
-            int[] intervals = new int[excercises];
-
-            for (int i = 0; i < excercises; i++) {
-                intervals[i] = Integer.parseInt(secondLineInput[i]);
-            }
+            int[] intervals = Stream.of(secondLineInput.split(" "))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
 
             int[] result = helper(intervals, expandExercises);
 
-            // to do
-//            if kx == 0.xx
-//            return count max diff;
-
-            // to do
-//            if 2 / 2 = 0
-//                    add to end
-
-            System.out.println(Arrays.toString(result));
-
+//            System.out.println(Arrays.toString(result));
+            int[] diffToPrint = findMaxDiff(result);
+            System.out.println("Case #" + caseCounter++ + ": " + diffToPrint[0]);
             tests--;
             if (tests == 0) bufferedReader.close();
         }
