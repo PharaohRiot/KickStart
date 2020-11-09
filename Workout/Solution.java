@@ -30,7 +30,7 @@ public class Solution {
         }
     }
 
-    private static int[] helper(int[] input, int expandExercises) {       // created this method for less time complexity
+    private static int[] helper(int[] input, int expandExercises) {       
         while (expandExercises > 0) {
             input = updateArray(input, findMaxDiff(input));
             expandExercises--;
